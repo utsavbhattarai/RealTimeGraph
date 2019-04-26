@@ -1,0 +1,101 @@
+<html>
+    <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="plotly.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+    <body>
+    <div class="navbar" style="display: flex;
+    justify-content: center;
+    align-items: center;" ><span>Welcome to the Guitar Tuner</span></div>
+    <div style="display: flex;
+    justify-content: center;
+    align-items: center;">
+    <button style="margin-left: 1%;" type="button" class="btn btn-secondary" onclick="setTimeout(plotGraphData, 1000);">Tune E</button>
+    <button style="margin-left: 1%;" type="button" class="btn btn-secondary" onclick="setTimeout(plotGraphData, 3000);">Tune A</button>
+    <button style="margin-left: 1%;" type="button" class="btn btn-secondary" onclick="setTimeout(plotGraphData, 3000);">Tune D</button>
+    <button style="margin-left: 1%;" type="button" class="btn btn-secondary" onclick="setTimeout(plotGraphData, 3000);">Tune G</button>
+    <button style="margin-left: 1%;" type="button" class="btn btn-secondary" onclick="setTimeout(plotGraphData, 3000);">Tune B</button>
+    <button style="margin-left: 1%;" type="button" class="btn btn-secondary" onclick="setTimeout(plotGraphData, 3000);">Tune E</button>
+    <select style="margin-left: 1%;"> 
+        <option value="saab">/dev/cu.usbmodem143201</option>
+      </select>
+      <button style="margin-left: 1%;" type="button" class="btn btn-info" onclick="setTimeout(arduinoConnection, 3000);">Connect</button>
+    </div>
+
+    <div class="wrapper">
+        <div id="chart"></div>
+        <script>
+
+            function arduinoConnection () {
+                alert("*****CONNECTED DEVICE : /dev/cu.usbmodem143201");
+            }
+            function getData() {
+                
+                //var dataE = [0,0,0,1,3,4,5,6,7,8,9,10,10,10,10,10.9,10.6,10.5,11,12];
+                
+                return Math.random();
+            }  
+            // draws the graph
+            function plotGraphData() {
+                Plotly.plot('chart',[{
+                y:[90],
+                type:'line'
+            }]);
+
+            //live graphing 
+            var cnt = 0;
+            var dataE = [90,
+            90.1, 90.4,90.3,90.2,90.0,90.25,90.3,90.14,90,89.8,89.6,89.4,89.1,88.9,88.7,88.6,88.5,88.5,88.45,88.42,88.41,88.3,88.4,88.42,88.43,88.3,88.3,88.25,88.2,88,87.8,87.5,87.1,86.9,86.7,86.4,
+            86.1,85.9,85.7,85.7,85.7,85.7,85.7,85.7
+            ,85.7,85.7,85.7,85.7,85.7,85.7,
+            85.4,85.2,85.1,84.7,84.3,84.2,83.9,83.6,83.5,83.3,83.3,83.3,83.3,83.3,83.3,83.3,83.3,83.3,83,82.9,82.6,82.2,82.1,82.1,82.1,82.1,82.1,82.1,82.1,82.1,82,81.7,81.3,81.1,81.1,81.1,
+            81.1,81.1,81.1,81.1,81.1,81.1,
+            ];
+            setInterval(function(){
+                
+                    Plotly.extendTraces('chart',{ y:[[dataE[cnt]]]}, [0]);
+                    cnt++;
+                    if(cnt > 200) {
+                        Plotly.relayout('chart',{
+                            xaxis: {
+                                range: [cnt-200,cnt]
+                            }
+                        });
+                    }
+            },300);
+            }
+
+            // draw zero graph for 5 seconds
+            // draws the graph
+            // function plotGraphDataZero() {
+                
+            //     Plotly.plot('chart',[{
+            //     y:[getData()],
+            //     type:'line'
+            // }]);
+
+            // //live graphing with 0 value
+            // var cnt = 0;
+            // setInterval(function(){
+            //     Plotly.extendTraces('chart',{ y:[[0]]}, [0]);
+            //     cnt++;
+            //     if(cnt > 300) {
+            //         Plotly.relayout('chart',{
+            //             xaxis: {
+            //                 range: [cnt-300,cnt]
+            //             }
+            //         });
+            //     }
+            // },1);
+            // // read the E string data after 3 seconds.
+            // setTimeout(plotGraphData, 3000);
+            // }
+
+            
+
+        </script>
+    </div>
+    </body>
+</html>

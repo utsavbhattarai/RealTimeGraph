@@ -1,0 +1,49 @@
+<html>
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="plotly.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+    <body>
+    <div class="navbar"><span>Welcome to the Guitar Tuner</span></div>
+    <button onclick="setTimeout(plotGraphDataZero, 1000);">Tune E</button>
+    <button onclick="setTimeout(plotGraphData, 3000);">Tune A</button>
+    <button onclick="setTimeout(plotGraphData, 3000);">Tune D</button>
+    <button onclick="setTimeout(plotGraphData, 3000);">Tune G</button>
+    <button onclick="setTimeout(plotGraphData, 3000);">Tune B</button>
+    <button onclick="setTimeout(plotGraphData, 3000);">Tune E</button>
+
+    <div class="wrapper">
+        <div id="chart"></div>
+        <script>
+            var x2 = [2, 3, 4, 5];
+var y2 =  [16, 5, 11, 9];
+
+var x3 = [1, 2, 3, 4];
+var y3 =  [12, 9, 15, 12];
+
+var trace2 = {
+  x: x2,
+  y: y2,
+  mode: 'lines'
+};
+
+var trace3 = {
+  x: x3,
+  y: y3,
+  mode: 'lines+markers'
+};
+
+var data = [ trace1, trace2, trace3 ];
+
+var layout = {
+  title:'Line and Scatter Plot'
+};
+
+Plotly.newPlot('myDiv', data, layout);
+            
+
+        </script>
+    </div>
+    </body>
+</html>
